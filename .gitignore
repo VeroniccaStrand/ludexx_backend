@@ -1,0 +1,36 @@
+# Node.js och React
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Byggartefakter
+dist/
+build/
+out/
+coverage/
+.cache/
+
+# Miljöfiler
+.env
+.env.local
+.env.*.local
+
+# Loggfiler
+*.log
+
+# Redaktörsfiler
+.idea/
+.vscode/
+*.swp
+*.sublime-*
+
+# Operativsystem
+.DS_Store
+Thumbs.db
+
+# Process Manager
+pids/
+*.pid
+*.pid.lock
+
