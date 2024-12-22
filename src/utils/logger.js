@@ -12,13 +12,14 @@ const consoleFormat = combine(
 
 // Format för filtransporten
 const fileFormat = combine(
-  errors({ stack: true }), 
+  errors({ stack: true }),
   timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
   printf((info) => {
+    const meta = info.meta ? `\nMeta: ${JSON.stringify(info.meta, null, 2)}` : '';
     if (info.stack) {
-      return `${info.timestamp} | ${info.level.toUpperCase()} | ${info.message}\nStacktrace: ${info.stack}`;
+      return `${info.timestamp} | ${info.level.toUpperCase()} | ${info.message}\nStacktrace: ${info.stack}${meta}`;
     }
-    return `${info.timestamp} | ${info.level.toUpperCase()} | ${info.message}`;
+    return `${info.timestamp} | ${info.level.toUpperCase()} | ${info.message}${meta}`;
   })
 );
 
@@ -39,6 +40,3 @@ export const logger = winston.createLogger({
 });
 
 
-logger.info('info log')
-logger.error('error log', new Error('test error'))
-logger.warn('warn log')
