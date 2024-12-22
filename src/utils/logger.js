@@ -1,6 +1,6 @@
 import winston from 'winston';
 
-const { combine, timestamp, printf, colorize, align } = winston.format;
+const { combine, timestamp, printf, colorize, align, errors } = winston.format;
 
 
 // Format för konsoltransporten
@@ -12,19 +12,26 @@ const consoleFormat = combine(
 
 // Format för filtransporten
 const fileFormat = combine(
+  errors({ stack: true }), 
   timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-  printf((info) => `${info.timestamp} | ${info.level.toUpperCase()} | ${info.message}`)
+  printf((info) => {
+    if (info.stack) {
+      return `${info.timestamp} | ${info.level.toUpperCase()} | ${info.message}\nStacktrace: ${info.stack}`;
+    }
+    return `${info.timestamp} | ${info.level.toUpperCase()} | ${info.message}`;
+  })
 );
 
 export const logger = winston.createLogger({
   level: process.env.LOG_LEVEL || 'info',
   transports: [
-    // Filtransport med eget format
+   
     new winston.transports.File({
-      filename: 'combined.log',
+      filename: 'Error.log',
       format: fileFormat,
+      level: 'error'
     }),
-    // Konsoltransport med eget format
+   
     new winston.transports.Console({
       format: consoleFormat,
     }),
@@ -32,3 +39,6 @@ export const logger = winston.createLogger({
 });
 
 
+logger.info('info log')
+logger.error('error log', new Error('test error'))
+logger.warn('warn log')

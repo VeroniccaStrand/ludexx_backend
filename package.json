@@ -5,8 +5,8 @@
   "description": "Backend API for Ludexx Games Platform ",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon -L server.js",
+    
+    "dev": "nodemon -L src/server.js",
     "test": "jest"
   },
   "author": "Veronica Strand",

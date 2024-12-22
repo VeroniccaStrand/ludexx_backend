@@ -1,16 +1,18 @@
+
+
 services:
   app:
     build:
-      context: .           # Bygg från den lokala katalogen
+      context: .           
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"        # Exponera port 3000
+      - "3000:3000"        
     volumes:
-      - .:/usr/src/app  # Mappa lokal kod till /app i containern
+      - .:/usr/src/app
       - /usr/src/app/node_modules 
     environment:
       NODE_ENV: development
      
-    command: npm run dev      # Kör utvecklingsscriptet med nodemon
+    command: npm run dev     
     env_file:
-      - .env                  # Läs miljövariabler från en .env-fil
+      - .env                 
