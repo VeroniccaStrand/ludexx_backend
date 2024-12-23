@@ -1,9 +1,10 @@
 import { User } from '../entities/User.js';
 
 export interface UserRepository {
-	create(user: User): Promise<User>;
-	findById(id: string): Promise<User | null>;
 	findAll(): Promise<User[]>;
-	update(user: User): Promise<User | void>;
+
+	findByGoogleId(googleId: string): Promise<User | null>;
+	create(user: Omit<User, 'id'>): Promise<User>;
+	update(user: User): Promise<User | null>;
 	delete(id: string): Promise<void>;
 }
