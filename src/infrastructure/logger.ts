@@ -1,4 +1,6 @@
 import winston from 'winston';
+import { AppError } from '../interface/middlewares/errorHandler.js';
+
 
 const { combine, timestamp, printf, colorize, align, errors } = winston.format;
 
